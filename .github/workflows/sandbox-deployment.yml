@@ -1,0 +1,26 @@
+name: Sandbox Deployment
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sandbox-deployment-main
+  cancel-in-progress: false
+
+jobs:
+  verify-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - name: Record harmless deployment signal
+        run: echo "Sandbox deployment verified for $GITHUB_SHA"
