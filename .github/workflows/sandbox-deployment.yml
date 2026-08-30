@@ -19,8 +19,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-          cache: npm
-      - run: npm ci
       - run: npm test
       - name: Record harmless deployment signal
         run: echo "Sandbox deployment verified for $GITHUB_SHA"
