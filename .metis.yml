@@ -1,0 +1,9 @@
+version: 1
+verification:
+  commands:
+    - npm test
+guardrails:
+  merge: forbidden
+  deployment: forbidden
+  production_mutation: forbidden
+  blocked_state: required
